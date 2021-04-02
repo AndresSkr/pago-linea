@@ -58,24 +58,17 @@ public class OrderService {
 
 	}
 
-	public Order UpdateOrder(int cc, Order order) {
-
-		boolean swCc = util.VerifyCc(order.getCc(), cc);
-		Order orderFind = null;
-		if (!swCc) {
-			return orderFind;
+	public Order GetOrderId(int id) {
+		try {
+			return OrderReq.stream().filter(p -> p.getId() == id).findFirst().get();
+		} catch (Exception e) {
+			Order order = null;
+			return order;
 		}
 
-		orderFind = GetOrderCC(cc);
+	}
 
-		if (orderFind == null) {
-			return orderFind;
-		}
-
-		Order orderVirificated = util.VerifyPriceToSave(order);
-
-		boolean swDate = util.VerifyDate(order, orderFind);
-		boolean swPrice = util.VerifyPriceToEdit(orderVirificated, orderFind);
+	public Order UpdateOrder(boolean swDate, boolean swPrice, Order orderFind, Order orderVirificated) {
 
 		if (swDate && swPrice) {
 			boolean swDelteOrder = OrderReq.remove(orderFind);
@@ -84,8 +77,44 @@ public class OrderService {
 				return orderUpdated;
 			}
 		}
+		Order order = null;
+		return order;
+		/*
+		 * boolean swCc = util.VerifyCc(order.getCc(), cc); Order orderFind = null; if
+		 * (!swCc) { return orderFind; }
+		 * 
+		 * orderFind = GetOrderId(id);
+		 * 
+		 * if (orderFind == null) { return orderFind; }
+		 * 
+		 * Order orderVirificated = util.VerifyPriceToSave(order);
+		 * 
+		 * boolean swDate = util.VerifyDate(order, orderFind); boolean swPrice =
+		 * util.VerifyPriceToEdit(orderVirificated, orderFind);
+		 * 
+		 * if (swDate && swPrice) { boolean swDelteOrder = OrderReq.remove(orderFind);
+		 * if (swDelteOrder) { Order orderUpdated = SaveOrder(orderVirificated); return
+		 * orderUpdated; } }
+		 * 
+		 * return orderFind;
+		 */
+	}
 
-		return orderFind;
+	public Order DeleteOrder(int idOrderDelete) {
+
+		Order orderDelete = GetOrderId(idOrderDelete);
+
+		if (orderDelete == null) {
+
+		}
+
+		boolean swDelteOrder = OrderReq.remove(orderDelete);
+
+		if (!swDelteOrder) {
+
+		}
+
+		return orderDelete;
 
 	}
 

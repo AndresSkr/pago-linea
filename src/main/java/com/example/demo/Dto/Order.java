@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Order {
+	private int id;
 		private String name;
 		private String address;
 	    private int cc;
@@ -15,11 +16,16 @@ public class Order {
 	    private List<Item> items;
 	    private Date dateCreate;
 	    
-	    
 	    public Order() {
 			super();
 			this.dateCreate = new Date();
 		}
+	    
+	    @JsonProperty("id")
+	    public int getId() { return id; }
+	    @JsonProperty("id")
+	    public void setId(int value) { this.id = value; }
+
 		@JsonProperty("name")
 	    public String getName() { return name; }
 	    @JsonProperty("name")
@@ -30,7 +36,6 @@ public class Order {
 	    @JsonProperty("cc")
 	    public void setCc(int value) { this.cc = value; }
 
-	   
 	    @JsonProperty("address")
 	    public String getAddress() { return address; }
 	    @JsonProperty("address")
@@ -42,13 +47,9 @@ public class Order {
 	    public Double getPriceHome() { return priceHome; }
 	    public void setPriceHome(Double value) { this.priceHome = value; }
 
-	   /* @JsonProperty("dateCreate")*/
 	    public Date getDateCreate() { return dateCreate; }
-	   /* @JsonProperty("dateCreate")*/
 	    public void setDateCreate(Date value) { this.dateCreate = value; }
 
-	    
-	    
 	    @JsonProperty("totalPrice")
 	    public Double getTotalPrice() { return totalPrice; }
 	    @JsonProperty("totalPrice")
