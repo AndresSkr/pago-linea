@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Item {
     private long id;
+    private int quantity;
     private String name;
     private long price;
 
@@ -17,6 +18,13 @@ public class Item {
     @JsonProperty("name")
     public void setName(String value) { this.name = value; }
 
+    @JsonProperty("quantity")
+    public int getQuantity() { return quantity; }
+    @JsonProperty("quantity")
+    public void setQuantity(int value) { this.quantity = value; }
+
+    
+    
     @JsonProperty("price")
     public long getPrice() { return price; }
     @JsonProperty("price")

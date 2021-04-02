@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,16 +24,9 @@ public class OrderController {
 	
 	@PostMapping
 	@RequestMapping("/Add")
-	public String AddOrder(@RequestBody Order order ) {
-		
-		boolean res = orderService.SaveOrder(order);
-		
-		if(res) {
-			return "ADD succesfull";
-		}else {
-			return "ADD Cancel";
-		}
-		
+	public Order AddOrder(@RequestBody Order order ) {
+		Order res = orderService.SaveOrder(order);
+		return res;
 	}
 
 	
@@ -48,18 +42,12 @@ public class OrderController {
 		return orderService.GetOrderCC(cc);
 	}
 	
-	@PostMapping
+	
+	@PutMapping
 	@RequestMapping("/update/{cc}")
-	public String UpdateOrder(@RequestBody Order order,@PathVariable int cc ) {
-		
-		boolean res = orderService.UpdateOrder(cc,order);
-		
-		if(res) {
-			return "Update succesfull";
-		}else {
-			return "Update Cancel";
-		}
-		
+	public Order UpdateOrder(@RequestBody Order order,@PathVariable int cc ) {
+		Order res = orderService.UpdateOrder(cc,order);
+		return res;
 	}
 	
 	
