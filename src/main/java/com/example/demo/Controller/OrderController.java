@@ -48,5 +48,19 @@ public class OrderController {
 		return orderService.GetOrderCC(cc);
 	}
 	
+	@PostMapping
+	@RequestMapping("/update/{cc}")
+	public String UpdateOrder(@RequestBody Order order,@PathVariable int cc ) {
+		
+		boolean res = orderService.UpdateOrder(cc,order);
+		
+		if(res) {
+			return "Update succesfull";
+		}else {
+			return "Update Cancel";
+		}
+		
+	}
+	
 	
 }
