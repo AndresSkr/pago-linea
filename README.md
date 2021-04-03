@@ -35,6 +35,7 @@ body
 ### Consultar todas las ordenes
 metodo post
 http://localhost:8080/order/getAll
+solo se mostraran las ordenes que tienes `status` en true
 
 metodo get
 ### Consultar orden por el id
@@ -90,3 +91,5 @@ body
     
     es la misma informacion que al crearla pero pero con los datos nuevos que quiere en la orden.
     el total price no importa que lo manden bien ya que en el codigo se valida y se reasignan los totales.
+
+NOTA: las ordenes eliminas con el 10% se guardan con los datos y precios normales, el valor del 10% se ve reflejado en el campo `totalPriceIva` y su status se comnvierte en `false`

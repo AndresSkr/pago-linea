@@ -146,11 +146,6 @@ public class OrderService {
 	Type listType = new TypeToken<ArrayList<Order>>(){}.getType();
 	ArrayList<Order> OrderReq = gson.fromJson(data, listType);
 	
-
-	
-	/*Order OrderData = gson.fromJson(data,Order.class);
-	
-	List<Order> OrderReq = new ArrayList<Order>();*/
 	Util util = new Util();
 
 	public Order SaveOrder(Order order) {
@@ -219,25 +214,6 @@ public class OrderService {
 		}
 		Order order = null;
 		return order;
-		/*
-		 * boolean swCc = util.VerifyCc(order.getCc(), cc); Order orderFind = null; if
-		 * (!swCc) { return orderFind; }
-		 * 
-		 * orderFind = GetOrderId(id);
-		 * 
-		 * if (orderFind == null) { return orderFind; }
-		 * 
-		 * Order orderVirificated = util.VerifyPriceToSave(order);
-		 * 
-		 * boolean swDate = util.VerifyDate(order, orderFind); boolean swPrice =
-		 * util.VerifyPriceToEdit(orderVirificated, orderFind);
-		 * 
-		 * if (swDate && swPrice) { boolean swDelteOrder = OrderReq.remove(orderFind);
-		 * if (swDelteOrder) { Order orderUpdated = SaveOrder(orderVirificated); return
-		 * orderUpdated; } }
-		 * 
-		 * return orderFind;
-		 */
 	}
 
 	public boolean DeleteOrder(Order orderDelete) {

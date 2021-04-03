@@ -1,55 +1,62 @@
 //////////INSET
-{
-    "id":1,
-    "name": "andres",
-    "cc": 123,
-    "address":"11# 14-08",
-    "totalPrice":102000,
-    "items": [
-        {
-            "id":1,
-            "name": "shoes ",
-            "price": 15000,
-            "quantity":1
-        },
-        {
-            "id":2,
-            "name": "jean",
-            "price": 20000,
-            "quantity":1
-        }, {
-            "id":3,
-            "name": "T-shirt",
-            "price": 50000,
-            "quantity":1
-        }
-    ]
-}
+ {
+        "id": 8,
+        "name": "Laura",
+        "cc": 321,
+        "address": "11# 14-08",
+        "totalPrice": 85000,
+        "items": [
+            {
+                "id": 1,
+                "name": "shoes ",
+                "price": 15000,
+                "quantity": 1
+            },
+            {
+                "id": 2,
+                "name": "jean",
+                "price": 20000,
+                "quantity": 1
+            },
+            {
+                "id": 3,
+                "name": "T-shirt",
+                "price": 50000,
+                "quantity": 1
+            }
+        ]
+    }
 ///////////////////UPDATE
 {
-    "id": 1,
-    "name": "andres",
-    "cc": 123,
-    "address": "11# 14-08",
-    "totalPrice": 102000,
-    "items": [
-        {
-            "id": 1,
-            "name": "shoes ",
-            "price": 15000,
-            "quantity": 1
-        },
-        {
-            "id": 2,
-            "name": "jean",
-            "price": 20000,
-            "quantity": 1
-        },
-        {
-            "id": 3,
-            "name": "T-shirt",
-            "price": 50000,
-            "quantity": 1
-        }
-    ]
-}
+        "id": 8,
+        "name": "Laura",
+        "cc": 321,
+        "address": "11# 14-08",
+        "totalPrice": 145000,
+        "items": [
+            {
+                "id": 1,
+                "name": "shoes ",
+                "price": 15000,
+                "quantity": 1
+            },
+            {
+                "id": 2,
+                "name": "jean",
+                "price": 20000,
+                "quantity": 2
+            },
+            {
+                "id": 3,
+                "name": "T-shirt",
+                "price": 50000,
+                "quantity": 2
+            },
+            {
+                "id": 5,
+                "name": "hat",
+                "price": 20000,
+                "quantity": 3
+            }
+        ]
+    }
