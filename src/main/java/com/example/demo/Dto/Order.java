@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Order {
 	private int id;
+		private boolean status;
 		private String name;
 		private String address;
 	    private int cc;
@@ -19,7 +20,11 @@ public class Order {
 	    public Order() {
 			super();
 			this.dateCreate = new Date();
+			this.status=true;
 		}
+	    
+	    public boolean getStatus() { return status; }
+	    public void setStatus(boolean value) { this.status = value; }
 	    
 	    @JsonProperty("id")
 	    public int getId() { return id; }

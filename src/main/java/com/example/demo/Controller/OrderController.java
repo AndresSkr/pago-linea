@@ -44,14 +44,15 @@ public class OrderController {
 
 	@GetMapping
 	@RequestMapping("/getCc/{cc}")
-	public responseOrder GetOrderCC(@PathVariable int cc) {
+	public List<Order> GetOrderCC(@PathVariable int cc) {
 
-		Order orderFind = orderService.GetOrderCC(cc);
+		List<Order> orderFind = orderService.GetOrderCC(cc);
 
+		
 		if (orderFind == null) {
-			return new responseOrder("Order by cc not found", 0, orderFind);
+			return orderFind;
 		}
-		return new responseOrder("ok", 1, orderFind);
+		return orderFind;
 	}
 
 	@GetMapping
@@ -70,22 +71,23 @@ public class OrderController {
 	@PutMapping
 	@RequestMapping("/update/{cc}/{id}")
 	public responseOrder UpdateOrder(@RequestBody Order order, @PathVariable int cc, @PathVariable int id) {
-		
-		boolean swCc = util.VerifyCc(order.getCc(), cc);
 		Order orderFind = null;
-		if (!swCc) {
-			return new responseOrder("Order cc is not equals to cc Url", 0, orderFind);
-		}
-
+		
 		orderFind = orderService.GetOrderId(id);
 
 		if (orderFind == null) {
 			return new responseOrder("Order by id not found", 0, orderFind);
 		}
+		
+
+		boolean swCc = util.VerifyCc(order.getCc(), cc, orderFind);
+		if (!swCc) {
+			return new responseOrder("Order cc is not equals to cc Url", 0, orderFind);
+		}
 
 		Order orderVirificated = util.VerifyPriceToSave(order);
 
-		boolean swDate = util.VerifyDate(order, orderFind);
+		boolean swDate = util.VerifyDate(order, orderFind,5);
 		boolean swPrice = util.VerifyPriceToEdit(orderVirificated, orderFind);
 		
 		 Order orderupdate = orderService.UpdateOrder(swDate, swPrice, orderFind, orderVirificated);
@@ -99,10 +101,27 @@ public class OrderController {
 
 	@DeleteMapping
 	@RequestMapping("/delete/{id}")
+	public responseOrder DeleteOrder(@PathVariable int id) {
+		Order orderFind = null;
+		orderFind = orderService.GetOrderId(id);
 
-	public Order DeleteOrder(@PathVariable int id) {
-		Order res = orderService.DeleteOrder(id);
-		return res;
+		if (orderFind == null) {
+			return new responseOrder("Order by id not found", 0, orderFind);
+		}
+		
+		
+		boolean swDate = util.VerifyDate(new Order(), orderFind, 12);
+		
+		if(!swDate) {
+			Order orderDeleteModify = orderService.saveOrderDelete(orderFind);
+			return new responseOrder("Order deleted but with 10%", 1, orderDeleteModify);
+		}else {
+			
+			orderService.DeleteOrder(orderFind);
+			return new responseOrder("Order deleted", 1, orderFind);
+		}
+		
+		
 	}
 
 }

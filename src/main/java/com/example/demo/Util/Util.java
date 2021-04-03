@@ -7,31 +7,28 @@ import com.example.demo.Dto.Order;
 
 public class Util {
 
-	
-	
 	public Order VerifyPriceToSave(Order order) {
 
 		Double priceCalculated = 0.0;
 		Order orderVerify = null;
 		List<Item> itemsOrder = order.getItems();
-		for(Item item :itemsOrder ) {
-			priceCalculated+=item.getPrice()*item.getQuantity();
+		for (Item item : itemsOrder) {
+			priceCalculated += item.getPrice() * item.getQuantity();
 		}
 		order.setTotalPrice(priceCalculated);
 		orderVerify = order;
 		return orderVerify;
 	}
-	
-	
-	
-	public boolean VerifyCc(int ccOrder, int ccUrl) {
 
-		if (ccOrder==ccUrl)
+	public boolean VerifyCc(int ccOrder, int ccUrl, Order order) {
+
+		if (ccOrder == ccUrl && ccUrl == order.getCc())
 			return true;
 		else
 			return false;
 	}
-	public boolean VerifyDate(Order order, Order orderFind) {
+
+	public boolean VerifyDate(Order order, Order orderFind, int hour) {
 
 		long diff = order.getDateCreate().getTime() - orderFind.getDateCreate().getTime();
 		long diffSeconds = diff / 1000 % 60;
@@ -40,7 +37,7 @@ public class Util {
 
 		System.out.println(diffSeconds + " " + diffMinutes + " " + diffHours);
 
-		if (diffHours > 5)
+		if (diffHours > hour)
 			return false;
 		else
 			return true;
@@ -53,6 +50,10 @@ public class Util {
 			return true;
 		else
 			return false;
+	}
+
+	public Double calculatePrice10(Double price) {
+		return price * 0.10;
 	}
 
 }
