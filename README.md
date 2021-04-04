@@ -39,19 +39,19 @@ solo se mostraran las ordenes que tienes `status` en true
 
 metodo get
 ### Consultar orden por el id
-http://localhost:8080/order/getId/{id} //sin los corchetes
+http://localhost:8080/order/getId/{id} //sin las llaves
 
 metodo get
 ### Consultar todas las ordenes que tenga una persona
-http://localhost:8080/order/getCc/{cc} //sin los corchetes
+http://localhost:8080/order/getCc/{cc} //sin las llaves
 
 metodo delete
 ### Eliminar una order por el id
-http://localhost:8080/order/delete/{id} //sin los corchetes
+http://localhost:8080/order/delete/{id} //sin las llaves
 
 
 ### modificar una orden
-http://localhost:8080/order/update/{cc}/{id} //sin los corchetes
+http://localhost:8080/order/update/{cc}/{id} //sin las llaves
 para modificar una orden es necesario la cedula del cliente y el numero de orden para verificar que si sea una orden del cliente, ademas se necesita un body mandando lo sigueinte 
 body
 
