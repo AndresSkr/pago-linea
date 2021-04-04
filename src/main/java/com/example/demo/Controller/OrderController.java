@@ -24,16 +24,17 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 	Util util = new Util();
+
 	@PostMapping
 	@RequestMapping("/add")
 	public responseOrder AddOrder(@RequestBody Order order) {
 		Order res = orderService.SaveOrder(order);
-		
+
 		if (res == null) {
 			return new responseOrder("Order Error", 0, res);
 		}
 		return new responseOrder("Order Add", 1, res);
-		
+
 	}
 
 	@GetMapping
@@ -48,7 +49,6 @@ public class OrderController {
 
 		List<Order> orderFind = orderService.GetOrderCC(cc);
 
-		
 		if (orderFind == null) {
 			return orderFind;
 		}
@@ -72,13 +72,12 @@ public class OrderController {
 	@RequestMapping("/update/{cc}/{id}")
 	public responseOrder UpdateOrder(@RequestBody Order order, @PathVariable int cc, @PathVariable int id) {
 		Order orderFind = null;
-		
+
 		orderFind = orderService.GetOrderId(id);
 
 		if (orderFind == null) {
 			return new responseOrder("Order by id not found", 0, orderFind);
 		}
-		
 
 		boolean swCc = util.VerifyCc(order.getCc(), cc, orderFind);
 		if (!swCc) {
@@ -87,16 +86,19 @@ public class OrderController {
 
 		Order orderVirificated = util.VerifyPriceToSave(order);
 
-		boolean swDate = util.VerifyDate(order, orderFind,5);
+		boolean swDate = util.VerifyDate(order, orderFind, 5);
 		boolean swPrice = util.VerifyPriceToEdit(orderVirificated, orderFind);
-		
-		 Order orderupdate = orderService.UpdateOrder(swDate, swPrice, orderFind, orderVirificated);
 
-		if (orderupdate==null) {
-			return new responseOrder("Date expired or price total under total Update", 0, orderFind);
+		if (!swDate) {
+			return new responseOrder("Date expired", 0, orderFind);
+		}
+		if (!swPrice) {
+			return new responseOrder("Price below the last price", 0, orderFind);
 		}
 
+		Order orderupdate = orderService.UpdateOrder(orderFind, orderVirificated);
 		return new responseOrder("Order Updated ", 1, orderupdate);
+
 	}
 
 	@DeleteMapping
@@ -108,20 +110,18 @@ public class OrderController {
 		if (orderFind == null) {
 			return new responseOrder("Order by id not found", 0, orderFind);
 		}
-		
-		
+
 		boolean swDate = util.VerifyDate(new Order(), orderFind, 12);
-		
-		if(!swDate) {
+
+		if (!swDate) {
 			Order orderDeleteModify = orderService.saveOrderDelete(orderFind);
 			return new responseOrder("Order deleted but with 10%", 1, orderDeleteModify);
-		}else {
-			
+		} else {
+
 			orderService.DeleteOrder(orderFind);
 			return new responseOrder("Order deleted", 1, orderFind);
 		}
-		
-		
+
 	}
 
 }
